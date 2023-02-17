@@ -1,0 +1,36 @@
+{% extends 'common.html' %}
+{% block tables %}
+<form >
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Present</th>
+        <th>abscent</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in student %}
+      <tr>
+        <td>{{i.name}}</td>
+        <td><input type="radio" name="a"></td>
+        <td><input type="radio" name="a"></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</form>
+<script>
+  function loadDoc(vale,atr) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", "/coach/changes/{{id}}/"+atr+"/"+vale, true);
+    xhttp.send();
+  }
+</script>
+{% endblock tables %}

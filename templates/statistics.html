@@ -1,0 +1,176 @@
+{% extends 'common.html' %}
+{% block tables %}
+<style type="text/css">
+  h1 {
+      color:green;
+  }
+  .xyz {
+      background-size: auto;
+      text-align: center;
+      padding-top: 100px;
+  }
+  .btn-circle.btn-sm {
+      width: 30px;
+      height: 30px;
+      padding: 6px 0px;
+      border-radius: 15px;
+      font-size: 15px;
+      text-align: center;
+  }
+  .btn-circle.btn-md {
+      width: 50px;
+      height: 50px;
+      padding: 7px 10px;
+      border-radius: 25px;
+      font-size: 10px;
+      text-align: center;
+  }
+  .btn-circle.btn-xl {
+      width: 70px;
+      height: 70px;
+      padding: 10px 16px;
+      border-radius: 35px;
+      font-size: 12px;
+      text-align: center;
+  }
+</style>
+<form >
+
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th style="width:70%"></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>speed</td>
+        <td><div class="progress">
+          <input type="hidden" id="speedin" value="{{s.speed}}">
+          <div id="speed" class="progress-bar" role="progressbar" aria-valuenow="100"
+          aria-valuemin="0" aria-valuemax="100" style="width:{{s.speed}}%" value="50">
+          {{s.speed}} 
+          </div>
+        </div></td>
+        <td>  	<button type="button" class="btn btn-primary btn-circle btn-sm" onclick="add('speed','in')">+</button> <button type="button" class="btn btn-primary btn-circle btn-sm" onclick="sub('speed','in')">-</button></td>
+      </tr>
+      <tr>
+        <td>stamina</td>
+        <td><div class="progress">
+          <input type="hidden" id="staminain" value="{{s.stamina}}">
+          <div id="stamina" class="progress-bar" role="progressbar" aria-valuenow="100"
+          aria-valuemin="0" aria-valuemax="100" style="width:{{s.stamina}}%" value="50">
+          {{s.stamina}}
+          </div>
+        </div></td>
+        <td>  	<button type="button" class="btn btn-primary btn-circle btn-sm" onclick="add('stamina','in')">+</button> <button type="button" class="btn btn-primary btn-circle btn-sm" onclick="sub('stamina','in')">-</button></td>
+      </tr>
+      <tr>
+        <td>Ball control </td>
+        <td><div class="progress">
+          <input type="hidden" id="ballin" value="{{s.bollcontronl}}">
+          <div id="ball" class="progress-bar" role="progressbar" aria-valuenow="100"
+          aria-valuemin="0" aria-valuemax="100" style="width:{{s.bollcontronl}}%" value="50">
+          {{s.bollcontronl}}
+          </div>
+        </div></td>
+        <td>  	<button type="button" class="btn btn-primary btn-circle btn-sm" onclick="add('ball','in')">+</button> <button type="button" class="btn btn-primary btn-circle btn-sm" onclick="sub('ball','in')">-</button></td>
+      </tr>
+      <tr>
+        <td>Pass Accuracy </td>
+        <td><div class="progress">
+          <input type="hidden" id="passin" value="{{s.passaccuracy}}">
+          <div id="pass" class="progress-bar" role="progressbar" aria-valuenow="100"
+          aria-valuemin="0" aria-valuemax="100" style="width:{{s.passaccuracy}}%" value="50">
+          {{s.passaccuracy}}
+          </div>
+        </div></td>
+        <td>  	<button type="button" class="btn btn-primary btn-circle btn-sm" onclick="add('pass','in')">+</button> <button type="button" class="btn btn-primary btn-circle btn-sm" onclick="sub('pass','in')">-</button></td>
+      </tr>
+      <tr>
+        <td>Shoot</td>
+        <td><div class="progress">
+          <input type="hidden" id="shootin" value="{{s.shoot}}">
+          <div id="shoot" class="progress-bar" role="progressbar" aria-valuenow="100"
+          aria-valuemin="0" aria-valuemax="100" style="width:{{s.shoot}}%" value="{{s.shoot}}">
+          {{s.shoot}}
+          </div>
+        </div></td>
+        <td>  	<button type="button" class="btn btn-primary btn-circle btn-sm" onclick="add('shoot','in')">+</button> <button type="button" class="btn btn-primary btn-circle btn-sm" onclick="sub('shoot','in')">-</button></td>
+      </tr>
+      <td>Tackles</td>
+      <td><div class="progress">
+        <input type="hidden" id="tackelsin" value="{{s.takles}}">
+        <div id="tackels" class="progress-bar" role="progressbar" aria-valuenow="100"
+        aria-valuemin="0" aria-valuemax="100" style="width:{{s.takles}}%" value="50">
+        {{s.takles}}
+        </div>
+      </div></td>
+      <td>  	<button type="button" class="btn btn-primary btn-circle btn-sm" onclick="add('tackels','in')">+</button> <button type="button" class="btn btn-primary btn-circle btn-sm" onclick="sub('tackels','in')">-</button></td>
+    </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary">Add to Team</button>
+  <div id="demo"></div>
+</form>
+<script>
+  function add(id,dd)
+  {
+
+    var bar=document.getElementById(id);
+    var v=parseInt( document.getElementById(id+dd).getAttribute("value"));
+    if(v>=0&&v+5<=100)
+    {v=v+5;
+      var a=getattr(id)
+    loadDoc(v.toString(),a);
+    }
+    bar.innerHTML=v.toString();
+    bar.setAttribute("style","width:"+v.toString()+"%")
+    document.getElementById(id+dd).setAttribute("value",v.toString())
+    
+  }
+  function getattr(inp)
+  {
+    if (inp=="speed")
+      return 1;
+    else if(inp=="stamina")
+      return 2;
+    else if(inp=="ball")
+      return 3;
+    else if(inp=="pass")
+      return 4;
+    else if(inp=="shoot")
+      return 5;
+    else if(inp=="tackels")
+      return 6;
+  }
+  function loadDoc(vale,atr) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", "/coach/changes/{{id}}/"+atr+"/"+vale, true);
+    xhttp.send();
+  }
+  function sub(id,dd)
+  {
+
+    var bar=document.getElementById(id);
+    var v=parseInt( document.getElementById(id+dd).getAttribute("value"));
+    if(v-5>=0&&v<=100)
+    {v=v-5;
+      var a=getattr(id)
+    loadDoc(v.toString(),a);
+    }
+    bar.innerHTML=v.toString();
+    bar.setAttribute("style","width:"+v.toString()+"%")
+    document.getElementById(id+dd).setAttribute("value",v.toString())
+    
+  }
+</script>
+{% endblock tables %}

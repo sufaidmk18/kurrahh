@@ -1,0 +1,22 @@
+{% extends 'common.html' %}
+{% block tables %}
+<form >
+<table class="table table-white">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Position</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in student %}
+     
+      <tr>
+        <td><a href="/coach/smenu/{{i.id}}">{{i.name}}</a></td>
+        <td><a href="/coach/smenu/{{i.id}}">{{i.position}}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</form>
+{% endblock tables %}
